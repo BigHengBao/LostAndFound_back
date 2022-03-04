@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.UserMapper">
+
+    <resultMap id="userInfo" type="com.heng.lostandfound.entity.User">
+        <result column="user_account" property="uid"/>
+        <result column="user_password" property="uPwd"/>
+        <result column="user_rname" property="rName"/>
+        <result column="user_sex" property="uSex"/>
+        <result column="user_phone" property="uPhone"/>
+        <result column="user_address" property="uAddress"/>
+        <result column="user_level" property="uLevel"/>
+        <result column="user_image" property="userImage"/>
+        <result column="user_write" property="uWrite"/>
+    </resultMap>
+
+    <!-- 更新结果  -->
+    <sql id="user_update">
+        <if test="uPwd != null">
+            user_password = #{uPwd},
+        </if>
+        <if test="rName != null">
+            user_rname = #{rName},
+        </if>
+        <if test="uSex != null">
+            user_sex = #{uSex},
+        </if>
+        <if test="uPhone != null">
+            user_phone = #{uPhone},
+        </if>
+        <if test="uAddress != null">
+            user_address = #{uAddress},
+        </if>
+        <if test="active != null">
+            active = #{active},
+        </if>
+        <if test="uLevel != active">
+            user_level = #{uLevel},
+        </if>
+        <if test="userImage != null">
+            user_image = #{userImage},
+        </if>
+        <if test="uWrite != null">
+            user_write = #{uWrite},
+        </if>
+
+    </sql>
+
+    <!-- 查询时条件   -->
+    <sql id="user_where">
+        <if test="uPwd != null">
+            and user_password = #{uPwd}
+        </if>
+        <if test="rName != null">
+            and user_rname = #{rName}
+        </if>
+        <if test="uSex != null">
+            and user_sex = #{uSex}
+        </if>
+        <if test="uPhone != null">
+            and user_phone = #{uPhone}
+        </if>
+        <if test="uAddress != null">
+            and user_address = #{uAddress}
+        </if>
+        <if test="active != null">
+            and active = #{active}
+        </if>
+        <if test="uLevel != active">
+            and user_level = #{uLevel}
+        </if>
+        <if test="userImage != null">
+            and user_image = #{userImage}
+        </if>
+        <if test="uWrite != null">
+            and user_write = #{uWrite}
+        </if>
+    </sql>
+
+    <select id="insertUser" parameterType="com.heng.lostandfound.entity.User" resultType="integer">
+        insert into `myuser` (user_account, user_password, user_rname, user_sex, user_phone,
+                              user_address, active, user_level, user_image, user_write)
+        values (#{uid}, #{uPwd}, #{rName}, #{uSex}, #{uPhone}, #{uAddress}, #{active}, #{uLevel}, #{userImage},
+                #{uWrite})
+    </select>
+
+    <select id="queryUsers" resultMap="userInfo" parameterType="com.heng.lostandfound.entity.User">
+        select *
+        from `myuser`
+    </select>
+
+    <select id="updateUser" parameterType="com.heng.lostandfound.entity.User">
+        update `myuser`
+        <set>
+            <include refid="user_update"/>
+        </set>
+        where user_account=#{uid}
+    </select>
+
+    <select id="queryByUid" resultMap="userInfo">
+        select *
+        from `myuser`
+        where user_account = #{uid}
+    </select>
+</mapper>
