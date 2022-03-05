@@ -2,6 +2,8 @@ package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.User;
 
+import java.util.HashMap;
+
 /**
  * Editor: hengBao
  * Wechat：zh17530588817
@@ -12,4 +14,5 @@ import com.heng.lostandfound.entity.User;
 public interface UserService {
     boolean registerUser(User user);
     boolean cancelUser(String uid);
+    boolean loginUser(HashMap<String, String> mHashMap);
 }

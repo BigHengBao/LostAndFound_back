@@ -50,6 +50,9 @@
 
     <!-- 查询时条件   -->
     <sql id="user_where">
+        <if test="uid != null">
+            and user_account = #{uid}
+        </if>
         <if test="uPwd != null">
             and user_password = #{uPwd}
         </if>
@@ -103,5 +106,12 @@
         select *
         from `myuser`
         where user_account = #{uid}
+    </select>
+
+    <select id="loginCheck" resultMap="userInfo">
+        select *
+        from `myuser`
+        where user_account = #{uid}
+          and user_password = #{uPwd}
     </select>
 </mapper>
