@@ -21,6 +21,5 @@ public interface UserMapper {
 
     User loginCheck(String uid,String uPwd);
 
-
     Integer updateUser(User user);
 }

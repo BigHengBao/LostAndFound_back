@@ -10,11 +10,31 @@ import java.io.Serializable;
  */
 public class MyResponse implements Serializable {
     private String requestId;
+    private String frontend;
     private boolean result;
+    private String msg;
 
-    public MyResponse(String requestId, boolean result) {
+    public MyResponse(String requestId, String frontend, boolean result, String msg) {
         this.requestId = requestId;
+        this.frontend = frontend;
         this.result = result;
+        this.msg = msg;
+    }
+
+    public String getFrontend() {
+        return frontend;
+    }
+
+    public void setFrontend(String frontend) {
+        this.frontend = frontend;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getRequestId() {
@@ -37,7 +57,9 @@ public class MyResponse implements Serializable {
     public String toString() {
         return "MyResponse{" +
                 "requestId='" + requestId + '\'' +
+                ", frontend='" + frontend + '\'' +
                 ", result=" + result +
+                ", msg='" + msg + '\'' +
                 '}';
     }
 }

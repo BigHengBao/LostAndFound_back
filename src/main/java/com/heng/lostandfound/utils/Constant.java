@@ -7,6 +7,9 @@ package com.heng.lostandfound.utils;
  * title：常量
  */
 public  class Constant {
+    //前端类型
+    public static final String FRONT_ANDROID = "android";
+    public static final String FRONT_PC = "pc";
     //是否可用
     public static final Integer ACTIVE_TRUE = 1;
     public static final Integer ACTIVE_FALSE = 0;
