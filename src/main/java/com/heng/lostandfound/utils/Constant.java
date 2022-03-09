@@ -26,9 +26,10 @@ public  class Constant {
     public static final Integer ORDER_ACTIVE_WAITING = 0;
     public static final Integer ORDER_ACTIVE_CONFIRM = 1;
     public static final Integer ORDER_ACTIVE_END = 2;
+    public static final Integer ORDER_ACTIVE_CANCEL = 3;
 
     //订单类型
     public static final Integer ORDER_TYPE_LOOKING = 0;
-    public static final Integer ORDER_TYPE_GET = 0;
+    public static final Integer ORDER_TYPE_GET = 1;
 
 }

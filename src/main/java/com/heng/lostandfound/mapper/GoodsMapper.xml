@@ -12,6 +12,28 @@
         <result column="user_account" property="uAccount"/>
     </resultMap>
 
+    <!-- 更新结果  -->
+    <sql id="goods_update">
+        <if test="gName != null">
+            goods_name = #{gName},
+        </if>
+        <if test="type != null">
+            goods_type = #{type},
+        </if>
+        <if test="getTime != null">
+            get_time = #{getTime},
+        </if>
+        <if test="loseTime != null">
+            lost_time = #{loseTime},
+        </if>
+        <if test="gImage != null">
+            goods_image = #{gImage},
+        </if>
+        <if test="uAccount != null">
+            user_account = #{uAccount},
+        </if>
+    </sql>
+
     <select id="insertGoods" parameterType="com.heng.lostandfound.entity.Goods" resultType="integer">
         insert into `goods` (goods_name, goods_type, get_time, lost_time, goods_image, user_account)
         values (#{gName}, #{type}, #{getTime}, #{loseTime}, #{gImage}, #{uAccount})
@@ -22,5 +44,18 @@
         from `goods`
         where goods_name = #{goodsName}
           and user_account = #{userAccount}
+    </select>
+
+    <select id="updateGoods" parameterType="com.heng.lostandfound.entity.Goods">
+        update `goods`
+        <set>
+            <include refid="goods_update"/>
+        </set>
+        where goods_name = #{goodsName}
+        and user_account = #{userAccount}
+    </select>
+
+    <select id="queryAllGoods" resultMap="goodsInfo">
+        select * from `goods`
     </select>
 </mapper>

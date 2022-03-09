@@ -36,7 +36,7 @@ public class UserController {
             boolean registerUserFlag = userService.registerUser(user);
             MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), registerUserFlag, "");
             myResponseStr = JSONObject.toJSONString(myResponse);
-            System.out.println("request" + myResponseStr);
+            System.out.println("registerUserFlag request" + myResponseStr);
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }
@@ -53,7 +53,7 @@ public class UserController {
             myResponseStr = JSONObject.toJSONString(myResponse);
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
         }
-        System.out.println(myResponseStr);
+        System.out.println("login" + myResponseStr);
         return myResponseStr;
     }
 
@@ -63,7 +63,7 @@ public class UserController {
         MyResponse myResponse = new MyResponse("cancel", Constant.FRONT_ANDROID, userService.cancelUser(uid), "");
         System.out.println(myResponse);
         String myResponseStr = JSONObject.toJSONString(myResponse);
-        System.out.println(myResponseStr);
+        System.out.println("cancel user" + myResponseStr);
         return myResponseStr;
     }
 }

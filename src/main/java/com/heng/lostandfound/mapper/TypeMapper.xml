@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.TypeMapper">
+
+    <resultMap id="typeInfo" type="com.heng.lostandfound.entity.GoodType">
+        <result column="type_name" property="typeName"/>
+        <result column="type_num" property="typeNum"/>
+        <result column="type_image" property="typeImage"/>
+        <result column="active" property="active"/>
+    </resultMap>
+
+    <select id="insertType" parameterType="com.heng.lostandfound.entity.GoodType">
+        insert into `goodstype` (type_name, type_num, type_image, active)
+        values (#{typeName}, #{typeNum}, #{typeImage}, #{active})
+    </select>
+
+    <select id="queryTypeById" resultMap="typeInfo">
+        select *
+        from `goodstype`
+        where type_name = #{typeName}
+    </select>
+
+    <select id="queryAllTypes" resultMap="typeInfo">
+        select *
+        from `goodstype`
+    </select>
+
+    <select id="updateType">
+        update `goodstype`
+        set type_num = type_num + 1
+        where type_name = #{typeName}
+    </select>
+
+</mapper>

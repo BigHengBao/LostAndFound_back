@@ -1,6 +1,9 @@
 package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.Goods;
+import com.heng.lostandfound.entity.Order;
+
+import java.util.List;
 
 /**
  * Editor: hengBao
@@ -11,4 +14,6 @@ import com.heng.lostandfound.entity.Goods;
 
 public interface OrderService {
     boolean addOrder(Goods goods,Integer noticeType);
+    boolean adjustOrderActive(String userAccount,String goodsName,Integer active);
+    List<Order> getAllOrder();
 }

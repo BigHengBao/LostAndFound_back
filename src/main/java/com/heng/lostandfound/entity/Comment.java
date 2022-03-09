@@ -10,14 +10,14 @@ import java.sql.Timestamp;
  */
 public class Comment {
     private String gName;
-    private String uid;
+    private String uAccount;
     private String content;
     private Timestamp addTime;
     private Integer active;
 
-    public Comment(String gName, String uid, String content, Timestamp addTime, Integer active) {
+    public Comment(String gName, String uAccount, String content, Timestamp addTime, Integer active) {
         this.gName = gName;
-        this.uid = uid;
+        this.uAccount = uAccount;
         this.content = content;
         this.addTime = addTime;
         this.active = active;
@@ -34,12 +34,12 @@ public class Comment {
         this.gName = gName;
     }
 
-    public String getUid() {
-        return uid;
+    public String getuAccount() {
+        return uAccount;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setuAccount(String uAccount) {
+        this.uAccount = uAccount;
     }
 
     public String getContent() {
@@ -68,9 +68,9 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "comment{" +
+        return "Comment{" +
                 "gName='" + gName + '\'' +
-                ", uid='" + uid + '\'' +
+                ", uAccount='" + uAccount + '\'' +
                 ", content='" + content + '\'' +
                 ", addTime=" + addTime +
                 ", active=" + active +

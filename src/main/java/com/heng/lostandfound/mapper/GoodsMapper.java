@@ -20,7 +20,7 @@ public interface GoodsMapper {
 
     int deleteGoods(Goods goods);
 
-    Integer updateGoods(Goods goods);
+    Integer updateGoods(Goods goods,String goodsName,String userAccount);
 
     Goods queryGoodsById(String goodsName,String userAccount);
 

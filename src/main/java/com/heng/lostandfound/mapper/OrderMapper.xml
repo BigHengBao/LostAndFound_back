@@ -22,4 +22,17 @@
         where goods_name = #{goodsName}
           and user_account = #{userAccount}
     </select>
+
+    <select id="updateOrder">
+        update `myorder`
+        set active = #{active}
+        where goods_name = #{goodsName}
+          and user_account = #{userAccount}
+    </select>
+
+    <select id="queryAllOrder" resultMap="orderInfo">
+        select *
+        from `myorder`
+    </select>
+
 </mapper>

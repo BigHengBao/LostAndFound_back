@@ -15,9 +15,7 @@ import java.util.List;
 public interface OrderMapper {
     void insertOrder(Order order);
 
-    Integer deleteOrder(String userAccount, String goodsName);
-
-    Integer updateOrder(Order order);
+    Integer updateOrder(String userAccount, String goodsName,Integer active);
 
     Order queryOrderById(String userAccount, String goodsName);
     List<Order> queryAllOrder();
