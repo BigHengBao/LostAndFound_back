@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class Goods {
     private String gName;
     private String type;
+    private String uAccount;
     private Timestamp getTime;
     private Timestamp loseTime;
     private String content;
@@ -19,13 +20,22 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(String gName, String type, Timestamp getTime, Timestamp loseTime, String content, String gImage) {
+    public Goods(String gName, String type, String uAccount, Timestamp getTime, Timestamp loseTime, String content, String gImage) {
         this.gName = gName;
         this.type = type;
+        this.uAccount = uAccount;
         this.getTime = getTime;
         this.loseTime = loseTime;
         this.content = content;
         this.gImage = gImage;
+    }
+
+    public String getuAccount() {
+        return uAccount;
+    }
+
+    public void setuAccount(String uAccount) {
+        this.uAccount = uAccount;
     }
 
     public String getgName() {
@@ -81,6 +91,7 @@ public class Goods {
         return "Goods{" +
                 "gName='" + gName + '\'' +
                 ", type='" + type + '\'' +
+                ", uAccount='" + uAccount + '\'' +
                 ", getTime=" + getTime +
                 ", loseTime=" + loseTime +
                 ", content='" + content + '\'' +

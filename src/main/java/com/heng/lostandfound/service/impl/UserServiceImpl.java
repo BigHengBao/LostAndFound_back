@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(User user) {
-        if (userMapper.queryByUid(user.getUid()) == null) {  //判断用户是否已存在
+        if (userMapper.queryUserByUid(user.getuAccount()) == null) {  //判断用户是否已存在
             user.setActive(Constant.ACTIVE_TRUE);
             userMapper.insertUser(user);
             return true;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean cancelUser(String uid) {
-        User user = userMapper.queryByUid(uid);
+        User user = userMapper.queryUserByUid(uid);
         if (user != null) {  //判断用户是否已存在
             user.setActive(Constant.ACTIVE_FALSE);
             userMapper.updateUser(user);

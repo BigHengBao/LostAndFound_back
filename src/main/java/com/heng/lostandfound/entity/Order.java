@@ -8,16 +8,16 @@ package com.heng.lostandfound.entity;
  */
 public class Order {
     private String gName;
-    private String uid;
+    private String uAccount;
     private Integer active;
     private Integer type;  //类型：0：寻物，1：招领
 
     public Order() {
     }
 
-    public Order(String gName, String uid, Integer active, Integer type) {
+    public Order(String gName, String uAccount, Integer active, Integer type) {
         this.gName = gName;
-        this.uid = uid;
+        this.uAccount = uAccount;
         this.active = active;
         this.type = type;
     }
@@ -30,12 +30,12 @@ public class Order {
         this.gName = gName;
     }
 
-    public String getUid() {
-        return uid;
+    public String getuAccount() {
+        return uAccount;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setuAccount(String uAccount) {
+        this.uAccount = uAccount;
     }
 
     public Integer getActive() {
@@ -58,7 +58,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "gName='" + gName + '\'' +
-                ", uid='" + uid + '\'' +
+                ", uAccount='" + uAccount + '\'' +
                 ", active=" + active +
                 ", type=" + type +
                 '}';

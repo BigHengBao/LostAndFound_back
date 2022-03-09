@@ -13,11 +13,10 @@ import java.util.List;
  */
 @Component(value = "userMapper")
 public interface UserMapper {
-
     void insertUser(User user);
 
     List<User> queryUsers();
-    User queryByUid(String uid);
+    User queryUserByUid(String uid);
 
     User loginCheck(String uid,String uPwd);
 

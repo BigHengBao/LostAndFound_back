@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.GoodsMapper">
+    <resultMap id="goodsInfo" type="com.heng.lostandfound.entity.Goods">
+        <result column="goods_name" property="gName"/>
+        <result column="goods_type" property="type"/>
+        <result column="get_time" property="getTime"/>
+        <result column="lost_time" property="loseTime"/>
+        <result column="goods_image" property="gImage"/>
+        <result column="user_account" property="uAccount"/>
+    </resultMap>
+
+    <select id="insertGoods" parameterType="com.heng.lostandfound.entity.Goods" resultType="integer">
+        insert into `goods` (goods_name, goods_type, get_time, lost_time, goods_image, user_account)
+        values (#{gName}, #{type}, #{getTime}, #{loseTime}, #{gImage}, #{uAccount})
+    </select>
+
+    <select id="queryGoodsById" resultMap="goodsInfo">
+        select *
+        from `goods`
+        where goods_name = #{goodsName}
+          and user_account = #{userAccount}
+    </select>
+</mapper>

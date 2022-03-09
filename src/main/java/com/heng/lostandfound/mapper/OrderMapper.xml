@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.OrderMapper">
+
+    <resultMap id="orderInfo" type="com.heng.lostandfound.entity.Order">
+        <result column="goods_name" property="gName"/>
+        <result column="user_account" property="uAccount"/>
+        <result column="order_type" property="type"/>
+        <result column="active" property="active"/>
+    </resultMap>
+
+    <select id="insertOrder" parameterType="com.heng.lostandfound.entity.Order" resultType="integer">
+        insert into `myorder` (goods_name, user_account, active, order_type)
+        values (#{gName}, #{uAccount}, #{active}, #{type})
+    </select>
+
+    <select id="queryOrderById" resultMap="orderInfo">
+        select *
+        from `myorder`
+        where goods_name = #{goodsName}
+          and user_account = #{userAccount}
+    </select>
+</mapper>

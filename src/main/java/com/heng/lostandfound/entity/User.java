@@ -7,7 +7,7 @@ package com.heng.lostandfound.entity;
  * title： 用户实体类
  */
 public class User {
-    private String uid;  //账号
+    private String uAccount;  //账号
     private  String uPwd;
     private String rName;
     private  Integer uSex;
@@ -21,8 +21,8 @@ public class User {
     public User() {
     }
 
-    public User(String uid, String uPwd, String rName, Integer uSex, String uPhone, String uAddress, Integer active, Integer uLevel, String userImage, String uWrite) {
-        this.uid = uid;
+    public User(String uAccount, String uPwd, String rName, Integer uSex, String uPhone, String uAddress, Integer active, Integer uLevel, String userImage, String uWrite) {
+        this.uAccount = uAccount;
         this.uPwd = uPwd;
         this.rName = rName;
         this.uSex = uSex;
@@ -34,12 +34,12 @@ public class User {
         this.uWrite = uWrite;
     }
 
-    public String getUid() {
-        return uid;
+    public String getuAccount() {
+        return uAccount;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setuAccount(String uAccount) {
+        this.uAccount = uAccount;
     }
 
     public String getuPwd() {
@@ -117,13 +117,13 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "uid='" + uid + '\'' +
+                "uAccount='" + uAccount + '\'' +
                 ", uPwd='" + uPwd + '\'' +
                 ", rName='" + rName + '\'' +
                 ", uSex=" + uSex +
                 ", uPhone='" + uPhone + '\'' +
                 ", uAddress='" + uAddress + '\'' +
-                ", active='" + active + '\'' +
+                ", active=" + active +
                 ", uLevel=" + uLevel +
                 ", userImage='" + userImage + '\'' +
                 ", uWrite='" + uWrite + '\'' +
