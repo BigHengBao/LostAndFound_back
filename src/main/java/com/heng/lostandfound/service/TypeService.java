@@ -1,6 +1,7 @@
 package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.GoodType;
+import com.heng.lostandfound.entity.GoodsTypeItem;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ import java.util.List;
 public interface TypeService {
     boolean addType(GoodType goodType);
 
-    List<GoodType> getAllTypes();
+    List<GoodsTypeItem> getAllTypes();
 }

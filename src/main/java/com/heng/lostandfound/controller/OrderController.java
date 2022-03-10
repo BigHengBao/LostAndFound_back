@@ -2,11 +2,10 @@ package com.heng.lostandfound.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.heng.lostandfound.entity.Goods;
-import com.heng.lostandfound.entity.MyResponse;
-import com.heng.lostandfound.entity.Order;
-import com.heng.lostandfound.entity.OrderItem;
+import com.heng.lostandfound.entity.*;
+import com.heng.lostandfound.mapper.TypeMapper;
 import com.heng.lostandfound.service.OrderService;
+import com.heng.lostandfound.service.TypeService;
 import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,9 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    TypeService typeService;
 
     @RequestMapping(value = "/addOrder", method = RequestMethod.POST)
     public String addOrder(@RequestBody String mHashMapStr) {
@@ -70,14 +72,14 @@ public class OrderController {
         System.out.println("getOrderList requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String myResponseStr = null;
-        boolean getOrderList = false;
+        boolean getOrderListFlag = false;
         List<OrderItem> allOrder = null;
         String msg = "";
 
         if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
             allOrder = orderService.getAllOrder();
             if (allOrder != null) {
-                getOrderList = true;
+                getOrderListFlag = true;
                 msg = JSON.toJSON(allOrder).toString();
                 System.out.println("getOrderList msg: " + msg);
             }
@@ -85,9 +87,36 @@ public class OrderController {
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }
-        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), getOrderList, msg);
+        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), getOrderListFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
-        System.out.println("addOrderFlag request" + myResponseStr);
+        System.out.println("getOrderList request" + myResponseStr);
+        return myResponseStr;
+    }
+
+    @RequestMapping(value = "/getAllGoodsType", method = RequestMethod.POST)
+    public String getAllGoodsType(@RequestBody String mHashMapStr) {
+        System.out.println("getAllGoodsType requestStr:" + mHashMapStr);
+        HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
+        String myResponseStr = null;
+        boolean getGoodsTypeFlag = false;
+        List<GoodsTypeItem> goodsTypeList = null;
+        String msg = "";
+
+        if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
+//            allOrder = orderService.getAllOrder();
+            goodsTypeList = typeService.getAllTypes();
+            if (goodsTypeList != null) {
+                getGoodsTypeFlag = true;
+                msg = JSON.toJSON(goodsTypeList).toString();
+                System.out.println("getAllGoodsType msg: " + msg);
+            }
+
+        } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
+
+        }
+        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), getGoodsTypeFlag, msg);
+        myResponseStr = JSONObject.toJSONString(myResponse);
+        System.out.println("getAllGoodsType request" + myResponseStr);
         return myResponseStr;
     }
 }

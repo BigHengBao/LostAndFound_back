@@ -1,10 +1,13 @@
 package com.heng.lostandfound.service.impl;
 
 import com.heng.lostandfound.entity.GoodType;
+import com.heng.lostandfound.entity.GoodsTypeItem;
 import com.heng.lostandfound.mapper.TypeMapper;
 import com.heng.lostandfound.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +16,7 @@ import java.util.List;
  * date: 2022/3/9/16:08
  * title：物品类别service实现类
  */
+@Service(value = "typeService")
 public class TypeServiceImpl implements TypeService {
     @Autowired
     TypeMapper typeMapper;
@@ -27,7 +31,18 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public List<GoodType> getAllTypes() {
-        return typeMapper.queryAllTypes();
+    public List<GoodsTypeItem> getAllTypes() {
+        List<GoodType> goodTypes = typeMapper.queryAllTypes();
+        List<GoodsTypeItem> mGoodsTypes = new ArrayList<>();
+        if (goodTypes != null) {
+            for (GoodType goodType : goodTypes) {
+                GoodsTypeItem goodsTypeItem = new GoodsTypeItem();
+                goodsTypeItem.setItemName(goodType.getTypeName());
+                goodsTypeItem.setItemImg(null);
+                mGoodsTypes.add(goodsTypeItem);
+            }
+            return mGoodsTypes;
+        }
+        return null;
     }
 }
