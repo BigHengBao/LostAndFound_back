@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.heng.lostandfound.entity.Goods;
 import com.heng.lostandfound.entity.MyResponse;
 import com.heng.lostandfound.entity.Order;
+import com.heng.lostandfound.entity.OrderItem;
 import com.heng.lostandfound.service.OrderService;
 import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class OrderController {
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String myResponseStr = null;
         boolean getOrderList = false;
-        List<Order> allOrder = null;
+        List<OrderItem> allOrder = null;
         String msg = "";
 
         if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {

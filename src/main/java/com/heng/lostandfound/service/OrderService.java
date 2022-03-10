@@ -2,6 +2,7 @@ package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.Goods;
 import com.heng.lostandfound.entity.Order;
+import com.heng.lostandfound.entity.OrderItem;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ import java.util.List;
 public interface OrderService {
     boolean addOrder(Goods goods,Integer noticeType);
     boolean adjustOrderActive(String userAccount,String goodsName,Integer active);
-    List<Order> getAllOrder();
+    List<OrderItem> getAllOrder();
 }

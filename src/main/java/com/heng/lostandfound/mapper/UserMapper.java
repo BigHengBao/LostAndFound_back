@@ -16,9 +16,9 @@ public interface UserMapper {
     void insertUser(User user);
 
     List<User> queryUsers();
-    User queryUserByUid(String uid);
+    User queryUserByUid(String uAccount);
 
-    User loginCheck(String uid,String uPwd);
+    User loginCheck(String uAccount,String uPwd);
 
     Integer updateUser(User user);
 }

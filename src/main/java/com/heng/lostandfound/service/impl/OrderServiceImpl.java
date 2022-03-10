@@ -3,15 +3,17 @@ package com.heng.lostandfound.service.impl;
 import com.heng.lostandfound.entity.GoodType;
 import com.heng.lostandfound.entity.Goods;
 import com.heng.lostandfound.entity.Order;
+import com.heng.lostandfound.entity.OrderItem;
+import com.heng.lostandfound.mapper.GoodsMapper;
 import com.heng.lostandfound.mapper.OrderMapper;
 import com.heng.lostandfound.mapper.TypeMapper;
-import com.heng.lostandfound.service.GoodsService;
+import com.heng.lostandfound.mapper.UserMapper;
 import com.heng.lostandfound.service.OrderService;
-import com.heng.lostandfound.service.TypeService;
 import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +29,10 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper orderMapper;
 
     @Autowired
-    GoodsService goodsService;
+    GoodsMapper goodsMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Autowired
     TypeMapper typeMapper;
@@ -40,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
             //插入一个用户-商品列
             orderMapper.insertOrder(order);
             //插入一个物品
-            goodsService.addGoods(goods);
+            goodsMapper.insertGoods(goods);
             String typeName = goods.getType();
             GoodType goodType = typeMapper.queryTypeById(typeName);
             if (goodType == null) {
@@ -65,10 +70,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrder() {
+    public List<OrderItem> getAllOrder() {
         List<Order> orders = orderMapper.queryAllOrder();
+        List<OrderItem> mOrder = new ArrayList<>();
         if (orders != null) {
-            return orders;
+            //封装
+            for (Order order : orders) {
+                OrderItem orderItem = new OrderItem();
+                Goods goods = goodsMapper.queryGoodsById(order.getgName(), order.getuAccount());
+                orderItem.setGoodsName(order.getgName());
+                orderItem.setAuthorName(userMapper.queryUserByUid(order.getuAccount()).getrName());
+                orderItem.setOrderType(order.getType());
+                orderItem.setGoodsType(goods.getType());
+                orderItem.setGoodsImage(null);
+                if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                    orderItem.setOrderTime(goods.getLoseTime().toString());
+                }else{
+                    orderItem.setOrderTime((goods.getGetTime().toString()));
+                }
+                mOrder.add(orderItem);
+            }
+            return mOrder;
         }
         return null;
     }

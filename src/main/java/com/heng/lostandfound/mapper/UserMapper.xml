@@ -5,7 +5,7 @@
 <mapper namespace="com.heng.lostandfound.mapper.UserMapper">
 
     <resultMap id="userInfo" type="com.heng.lostandfound.entity.User">
-        <result column="user_account" property="uid"/>
+        <result column="user_account" property="uAccount"/>
         <result column="user_password" property="uPwd"/>
         <result column="user_rname" property="rName"/>
         <result column="user_sex" property="uSex"/>
@@ -50,8 +50,8 @@
 
     <!-- 查询时条件   -->
     <sql id="user_where">
-        <if test="uid != null">
-            and user_account = #{uid}
+        <if test="uAccount != null">
+            and user_account = #{uAccount}
         </if>
         <if test="uPwd != null">
             and user_password = #{uPwd}
@@ -85,7 +85,7 @@
     <select id="insertUser" parameterType="com.heng.lostandfound.entity.User" resultType="integer">
         insert into `myuser` (user_account, user_password, user_rname, user_sex, user_phone,
                               user_address, active, user_level, user_image, user_write)
-        values (#{uid}, #{uPwd}, #{rName}, #{uSex}, #{uPhone}, #{uAddress}, #{active}, #{uLevel}, #{userImage},
+        values (#{uAccount}, #{uPwd}, #{rName}, #{uSex}, #{uPhone}, #{uAddress}, #{active}, #{uLevel}, #{userImage},
                 #{uWrite})
     </select>
 
@@ -99,19 +99,19 @@
         <set>
             <include refid="user_update"/>
         </set>
-        where user_account=#{uid}
+        where user_account=#{uAccount}
     </select>
 
-    <select id="queryByUid" resultMap="userInfo">
+    <select id="queryUserByUid" resultMap="userInfo">
         select *
         from `myuser`
-        where user_account = #{uid}
+        where user_account = #{uAccount}
     </select>
 
     <select id="loginCheck" resultMap="userInfo">
         select *
         from `myuser`
-        where user_account = #{uid}
+        where user_account = #{uAccount}
           and user_password = #{uPwd}
     </select>
 </mapper>
