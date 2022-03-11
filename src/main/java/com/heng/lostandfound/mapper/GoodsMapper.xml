@@ -32,11 +32,14 @@
         <if test="uAccount != null">
             user_account = #{uAccount},
         </if>
+        <if test="address != null">
+            address = #{address},
+        </if>
     </sql>
 
     <select id="insertGoods" parameterType="com.heng.lostandfound.entity.Goods" resultType="integer">
-        insert into `goods` (goods_name, goods_type, get_time, lost_time, goods_image, user_account)
-        values (#{gName}, #{type}, #{getTime}, #{loseTime}, #{gImage}, #{uAccount})
+        insert into `goods` (goods_name, goods_type, get_time, lost_time, goods_image, user_account, address, content)
+        values (#{gName}, #{type}, #{getTime}, #{loseTime}, #{gImage}, #{uAccount}, #{address}, #{content})
     </select>
 
     <select id="queryGoodsById" resultMap="goodsInfo">
@@ -56,6 +59,7 @@
     </select>
 
     <select id="queryAllGoods" resultMap="goodsInfo">
-        select * from `goods`
+        select *
+        from `goods`
     </select>
 </mapper>

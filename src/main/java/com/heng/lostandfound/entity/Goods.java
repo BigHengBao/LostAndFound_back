@@ -1,6 +1,5 @@
 package com.heng.lostandfound.entity;
 
-import java.sql.Timestamp;
 
 /**
  * Editor: hengBao
@@ -12,15 +11,16 @@ public class Goods {
     private String gName;
     private String type;
     private String uAccount;
-    private Timestamp getTime;
-    private Timestamp loseTime;
+    private String getTime;
+    private String loseTime;
     private String content;
     private String gImage;
+    private String address;
 
     public Goods() {
     }
 
-    public Goods(String gName, String type, String uAccount, Timestamp getTime, Timestamp loseTime, String content, String gImage) {
+    public Goods(String gName, String type, String uAccount, String getTime, String loseTime, String content, String gImage, String address) {
         this.gName = gName;
         this.type = type;
         this.uAccount = uAccount;
@@ -28,6 +28,7 @@ public class Goods {
         this.loseTime = loseTime;
         this.content = content;
         this.gImage = gImage;
+        this.address = address;
     }
 
     public String getuAccount() {
@@ -54,19 +55,19 @@ public class Goods {
         this.type = type;
     }
 
-    public Timestamp getGetTime() {
+    public String getGetTime() {
         return getTime;
     }
 
-    public void setGetTime(Timestamp getTime) {
+    public void setGetTime(String getTime) {
         this.getTime = getTime;
     }
 
-    public Timestamp getLoseTime() {
+    public String getLoseTime() {
         return loseTime;
     }
 
-    public void setLoseTime(Timestamp loseTime) {
+    public void setLoseTime(String loseTime) {
         this.loseTime = loseTime;
     }
 
@@ -86,6 +87,14 @@ public class Goods {
         this.gImage = gImage;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -96,6 +105,7 @@ public class Goods {
                 ", loseTime=" + loseTime +
                 ", content='" + content + '\'' +
                 ", gImage='" + gImage + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

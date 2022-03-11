@@ -84,9 +84,9 @@ public class OrderServiceImpl implements OrderService {
                 orderItem.setGoodsType(goods.getType());
                 orderItem.setGoodsImage(null);
                 if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
-                    orderItem.setOrderTime(goods.getLoseTime().toString());
+                    orderItem.setOrderTime(goods.getLoseTime());
                 }else{
-                    orderItem.setOrderTime((goods.getGetTime().toString()));
+                    orderItem.setOrderTime((goods.getGetTime()));
                 }
                 mOrder.add(orderItem);
             }

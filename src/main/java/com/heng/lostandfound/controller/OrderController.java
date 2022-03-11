@@ -36,6 +36,8 @@ public class OrderController {
 
         if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
             Goods goods = JSON.parseObject(mHashMap.get("goods").toString(), Goods.class);
+            System.out.println("addOrder goods: " + goods);
+
             Integer orderType = (Integer) mHashMap.get("orderType");
             boolean addOrderFlag = orderService.addOrder(goods, orderType);
             MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), addOrderFlag, "");
