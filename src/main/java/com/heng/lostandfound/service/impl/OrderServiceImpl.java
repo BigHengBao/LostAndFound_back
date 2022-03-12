@@ -77,18 +77,21 @@ public class OrderServiceImpl implements OrderService {
             //封装
             for (Order order : orders) {
                 OrderItem orderItem = new OrderItem();
-                Goods goods = goodsMapper.queryGoodsById(order.getgName(), order.getuAccount());
-                orderItem.setGoodsName(order.getgName());
-                orderItem.setAuthorName(userMapper.queryUserByUid(order.getuAccount()).getrName());
-                orderItem.setOrderType(order.getType());
-                orderItem.setGoodsType(goods.getType());
-                orderItem.setGoodsImage(null);
-                if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
-                    orderItem.setOrderTime(goods.getLoseTime());
-                }else{
-                    orderItem.setOrderTime((goods.getGetTime()));
+                if (order.getActive() != Constant.ORDER_ACTIVE_END
+                        && order.getActive() != Constant.ORDER_ACTIVE_CANCEL) {
+                    Goods goods = goodsMapper.queryGoodsById(order.getgName(), order.getuAccount());
+                    orderItem.setGoodsName(order.getgName());
+                    orderItem.setAuthorName(userMapper.queryUserByUid(order.getuAccount()).getrName());
+                    orderItem.setOrderType(order.getType());
+                    orderItem.setGoodsType(goods.getType());
+                    orderItem.setGoodsImage(null);
+                    if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                        orderItem.setOrderTime(goods.getLoseTime());
+                    } else {
+                        orderItem.setOrderTime((goods.getGetTime()));
+                    }
+                    mOrder.add(orderItem);
                 }
-                mOrder.add(orderItem);
             }
             return mOrder;
         }
