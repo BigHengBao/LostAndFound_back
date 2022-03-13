@@ -12,10 +12,10 @@ public class Comment {
     private String gName;
     private String uAccount;
     private String content;
-    private Timestamp addTime;
+    private String addTime;
     private Integer active;
 
-    public Comment(String gName, String uAccount, String content, Timestamp addTime, Integer active) {
+    public Comment(String gName, String uAccount, String content, String addTime, Integer active) {
         this.gName = gName;
         this.uAccount = uAccount;
         this.content = content;
@@ -50,11 +50,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Timestamp getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Timestamp addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 

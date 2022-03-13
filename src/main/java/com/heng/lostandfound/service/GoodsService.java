@@ -1,6 +1,9 @@
 package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.Goods;
+import com.heng.lostandfound.entity.GoodsInfoItem;
+
+import java.util.List;
 
 /**
  * Editor: hengBao
@@ -11,4 +14,7 @@ import com.heng.lostandfound.entity.Goods;
 
 public interface GoodsService {
     boolean addGoods(Goods goods);
+
+    List<Goods> getAllGoods();
+    GoodsInfoItem getGoodsById(String goodsName, String uName);
 }

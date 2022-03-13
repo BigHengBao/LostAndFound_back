@@ -108,6 +108,12 @@
         where user_account = #{uAccount}
     </select>
 
+    <select id="queryUserByuName" resultMap="userInfo">
+        select *
+        from `myuser`
+        where user_rname = #{uName}
+    </select>
+
     <select id="loginCheck" resultMap="userInfo">
         select *
         from `myuser`

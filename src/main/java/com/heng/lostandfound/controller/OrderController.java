@@ -62,7 +62,7 @@ public class OrderController {
             boolean adjustOrderFlag = orderService.adjustOrderActive(userAccount, goodsName, active);
             MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), adjustOrderFlag, "");
             myResponseStr = JSONObject.toJSONString(myResponse);
-            System.out.println("addOrderFlag request" + myResponseStr);
+            System.out.println("updateOrder request" + myResponseStr);
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }
@@ -89,7 +89,8 @@ public class OrderController {
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }
-        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), getOrderListFlag, msg);
+        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
+                (String) mHashMap.get("front"), getOrderListFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
         System.out.println("getOrderList request" + myResponseStr);
         return myResponseStr;
