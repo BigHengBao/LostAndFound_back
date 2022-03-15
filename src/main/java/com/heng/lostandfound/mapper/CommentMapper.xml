@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.CommentMapper">
+
+    <resultMap id="commentInfo" type="com.heng.lostandfound.entity.Comment">
+        <result column="goods_name" property="gName"/>
+        <result column="user_account" property="uAccount"/>
+        <result column="content" property="content"/>
+        <result column="addtime" property="addTime"/>
+        <result column="active" property="active"/>
+        <result column="author_name" property="authorName"/>
+    </resultMap>
+
+
+    <select id="insertComment">
+        insert into `mycomment` (goods_name, user_account, content, addtime, active, author_name)
+        values (#{gName}, #{uAccount}, #{content}, #{addTime}, #{active}, #{authorName})
+    </select>
+
+    <select id="getAllCommentsById" resultMap="commentInfo">
+        select *
+        from `mycomment`
+        where active = 0
+    </select>
+
+    <select id="queryCommentById" resultMap="commentInfo">
+        select *
+        from `mycomment`
+        where goods_name = #{goodsName}
+          and user_account = #{uAccount}
+          and author_name = #{authorName}
+    </select>
+
+    <select id="updateComment">
+
+    </select>
+
+</mapper>
