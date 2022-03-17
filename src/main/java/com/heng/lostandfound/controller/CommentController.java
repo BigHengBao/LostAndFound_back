@@ -56,14 +56,14 @@ public class CommentController {
         System.out.println("getCommentListById requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String goodsName = (String) mHashMap.get("goodsName");
-        String uAccount = (String) mHashMap.get("authorName");
+        String authorName = (String) mHashMap.get("authorName");
         String myResponseStr = null;
         boolean getCommentByIdFlag = false;
         List<CommentItem> allComments = null;
         String msg = "";
 
         if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
-            allComments = commentService.getAllComments(goodsName, uAccount);
+            allComments = commentService.getAllComments(goodsName, authorName);
             if (allComments != null) {
                 getCommentByIdFlag = true;
                 msg = JSON.toJSON(allComments).toString();

@@ -22,7 +22,9 @@
     <select id="getAllCommentsById" resultMap="commentInfo">
         select *
         from `mycomment`
-        where active = 0
+        where active = 1
+          and goods_name = #{goodsName}
+          and author_name = #{authorName}
     </select>
 
     <select id="queryCommentById" resultMap="commentInfo">

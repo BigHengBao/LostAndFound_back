@@ -15,7 +15,7 @@ import java.util.List;
 public interface CommentMapper {
     void insertComment(Comment comment);
 
-    List<Comment> getAllCommentsById(String goodsName, String uAccount);
+    List<Comment> getAllCommentsById(String goodsName, String authorName);
 
     Comment queryCommentById(String goodsName, String uAccount, String authorName);
 

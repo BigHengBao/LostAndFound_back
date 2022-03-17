@@ -35,13 +35,15 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentItem> getAllComments(String goodsName, String authorName) {
         List<CommentItem> comments = new ArrayList<>();
-        User user = userMapper.queryUserByuName(authorName);
-        List<Comment> allCommentsById = commentMapper.getAllCommentsById(goodsName, user.getuAccount());
+//        User user = userMapper.queryUserByuName(authorName);
+//        System.out.println("getAllComments author:-->" + user);
+        List<Comment> allCommentsById = commentMapper.getAllCommentsById(goodsName, authorName);
 
         if (allCommentsById != null) {
             for (Comment comment : allCommentsById) {
+                String name = userMapper.queryUserByUid(comment.getuAccount()).getrName();
                 CommentItem commentItem = new CommentItem();
-                commentItem.setUsername(authorName);
+                commentItem.setUsername(name);
                 commentItem.setContent(comment.getContent());
                 commentItem.setAddTime(comment.getAddTime());
                 commentItem.setUserImg(null);
