@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public User getUserInfo(String uAccount) {
+        return userMapper.queryUserByUid(uAccount);
+    }
 }

@@ -17,7 +17,7 @@ public interface CollectionMapper {
 
     List<UserCollection> queryAllCollections(String uAccount);
 
-    UserCollection queryCollectionById(String goodsName, String authorName, String uAccount);
+    UserCollection queryCollectionById(String goodsName, String authorName, String uAccount,String addTime);
 
     void updateCollection(UserCollection collection);
 }

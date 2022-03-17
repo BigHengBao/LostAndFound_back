@@ -12,9 +12,29 @@
         <result column="user_account" property="uAccount"/>
     </resultMap>
 
+    <!-- 更新结果  -->
+    <sql id="collection_update">
+        <if test="gName != null">
+            goods_name = #{gName},
+        </if>
+        <if test="gAuthorName != null">
+            author_name = #{gAuthorName},
+        </if>
+        <if test="addTime != null">
+            addtime = #{addTime},
+        </if>
+        <if test="active != null">
+            active = #{active},
+        </if>
+        <if test="uAccount != null">
+            user_account = #{uAccount},
+        </if>
+
+    </sql>
+
     <select id="insertCollection">
         insert into `collection` (goods_name, author_name, addtime, active, user_account)
-        values (#{gName}, #{author_name}, #{addtime}, #{active}, #{user_account})
+        values (#{gName}, #{gAuthorName}, #{addTime}, #{active}, #{uAccount})
     </select>
 
     <select id="queryAllCollections" resultMap="collectionInfo">
@@ -30,9 +50,15 @@
         where goods_name = #{goodsName}
           and author_name = #{authorName}
           and user_account = #{uAccount}
+          and addtime = #{addTime}
+          and active = 1
     </select>
 
     <select id="updateCollection">
-
+        update `collection`
+        <set>
+            <include refid="collection_update"/>
+        </set>
+        where user_account=#{uAccount}
     </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.heng.lostandfound.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.heng.lostandfound.entity.CommentItem;
 import com.heng.lostandfound.entity.MyResponse;
 import com.heng.lostandfound.entity.User;
 import com.heng.lostandfound.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Editor: hengBao
@@ -64,6 +66,33 @@ public class UserController {
         System.out.println(myResponse);
         String myResponseStr = JSONObject.toJSONString(myResponse);
         System.out.println("cancel user" + myResponseStr);
+        return myResponseStr;
+    }
+
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
+    public String getUserInfo(@RequestBody String mHashMapStr) {
+        System.out.println("getUserInfo requestStr:" + mHashMapStr);
+        HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
+        String uAccount = (String) mHashMap.get("userAccount");
+        String myResponseStr = null;
+        boolean getUserInfoFlag = false;
+        String msg = "";
+
+        if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
+            User userInfo = userService.getUserInfo(uAccount);
+            if (userInfo != null) {
+                getUserInfoFlag = true;
+                msg = JSON.toJSON(userInfo).toString();
+                System.out.println("getUserInfo msg: " + msg);
+            }
+
+        } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
+
+        }
+        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
+                (String) mHashMap.get("front"), getUserInfoFlag, msg);
+        myResponseStr = JSONObject.toJSONString(myResponse);
+        System.out.println("getUserInfo request" + myResponseStr);
         return myResponseStr;
     }
 }

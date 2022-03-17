@@ -1,5 +1,6 @@
 package com.heng.lostandfound.service;
 
+import com.heng.lostandfound.entity.OrderItem;
 import com.heng.lostandfound.entity.UserCollection;
 
 import java.util.List;
@@ -14,5 +15,7 @@ import java.util.List;
 public interface CollectionService {
     boolean addCollection(UserCollection collection);
 
-    List<UserCollection> getAllCollections(String uAccount);
+    boolean deleteCollection(UserCollection collection);
+
+    List<OrderItem> getAllCollections(String uAccount);
 }
