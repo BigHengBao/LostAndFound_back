@@ -48,7 +48,7 @@ public class CommentServiceImpl implements CommentService {
                 commentItem.setAddTime(comment.getAddTime());
                 commentItem.setUserImg(null);
                 comments.add(commentItem);
-                System.out.println("getAllComments:---------------------->" + commentItem);
+//                System.out.println("getAllComments:---------------------->" + commentItem);
             }
             return comments;
         }

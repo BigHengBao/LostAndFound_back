@@ -36,4 +36,8 @@ public class Constant {
     public static final Integer COMMENT_ACTIVE_TRUE = 1;
     public static final Integer COMMENT_ACTIVE_FALSE = 0;
 
+    //收藏类型
+    public static final Integer COLLECTION_ACTIVE_TRUE = 1;
+    public static final Integer COLLECTION_ACTIVE_FALSE = 0;
+
 }

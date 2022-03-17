@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heng.lostandfound.mapper.CollectionMapper">
+
+    <resultMap id="collectionInfo" type="com.heng.lostandfound.entity.UserCollection">
+        <result column="goods_name" property="gName"/>
+        <result column="author_name" property="gAuthorName"/>
+        <result column="addtime" property="addTime"/>
+        <result column="active" property="active"/>
+        <result column="user_account" property="uAccount"/>
+    </resultMap>
+
+    <select id="insertCollection">
+        insert into `collection` (goods_name, author_name, addtime, active, user_account)
+        values (#{gName}, #{author_name}, #{addtime}, #{active}, #{user_account})
+    </select>
+
+    <select id="queryAllCollections" resultMap="collectionInfo">
+        select *
+        from `collection`
+        where active = 1
+          and user_account = #{uAccount}
+    </select>
+
+    <select id="queryCollectionById" resultMap="collectionInfo">
+        select *
+        from `collection`
+        where goods_name = #{goodsName}
+          and author_name = #{authorName}
+          and user_account = #{uAccount}
+    </select>
+
+    <select id="updateCollection">
+
+    </select>
+</mapper>

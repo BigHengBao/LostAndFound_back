@@ -10,17 +10,17 @@ import java.sql.Timestamp;
  */
 public class UserCollection {
     private String gName;  //物品名称
-    private String uid;  //用户账号
-    private Timestamp addTime;
+    private String uAccount;  //用户账号
+    private String addTime;
     private Integer active;
-    private String gUser;    //发启事的账号
+    private String gAuthorName;    //发启事的账号
 
-    public UserCollection(String gName, String uid, Timestamp addTime, Integer active, String gUser) {
+    public UserCollection(String gName, String uAccount, String addTime, Integer active, String gAuthorName) {
         this.gName = gName;
-        this.uid = uid;
+        this.uAccount = uAccount;
         this.addTime = addTime;
         this.active = active;
-        this.gUser = gUser;
+        this.gAuthorName = gAuthorName;
     }
 
     public UserCollection() {
@@ -34,19 +34,19 @@ public class UserCollection {
         this.gName = gName;
     }
 
-    public String getUid() {
-        return uid;
+    public String getuAccount() {
+        return uAccount;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setuAccount(String uAccount) {
+        this.uAccount = uAccount;
     }
 
-    public Timestamp getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Timestamp addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 
@@ -58,22 +58,22 @@ public class UserCollection {
         this.active = active;
     }
 
-    public String getgUser() {
-        return gUser;
+    public String getgAuthorName() {
+        return gAuthorName;
     }
 
-    public void setgUser(String gUser) {
-        this.gUser = gUser;
+    public void setgAuthorName(String gAuthorName) {
+        this.gAuthorName = gAuthorName;
     }
 
     @Override
     public String toString() {
         return "collection{" +
                 "gName='" + gName + '\'' +
-                ", uid='" + uid + '\'' +
+                ", uid='" + uAccount + '\'' +
                 ", addTime=" + addTime +
                 ", active=" + active +
-                ", gUser='" + gUser + '\'' +
+                ", gUser='" + gAuthorName + '\'' +
                 '}';
     }
 }
