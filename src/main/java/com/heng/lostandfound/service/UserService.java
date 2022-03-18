@@ -13,7 +13,10 @@ import java.util.HashMap;
 
 public interface UserService {
     boolean registerUser(User user);
+
     boolean cancelUser(String uid);
+
     boolean loginUser(HashMap<String, String> mHashMap);
+
     User getUserInfo(String uAccount);
 }

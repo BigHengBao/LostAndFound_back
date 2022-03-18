@@ -16,10 +16,12 @@ public interface UserMapper {
     void insertUser(User user);
 
     List<User> queryUsers();
+
     User queryUserByUid(String uAccount);
+
     User queryUserByuName(String uName);
 
-    User loginCheck(String uAccount,String uPwd);
+    User loginCheck(String uAccount, String uPwd);
 
     Integer updateUser(User user);
 }

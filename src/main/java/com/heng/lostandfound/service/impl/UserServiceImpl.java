@@ -53,6 +53,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserInfo(String uAccount) {
-        return userMapper.queryUserByUid(uAccount);
+        User user = userMapper.queryUserByUid(uAccount);
+        System.out.println("getUserInfo------------------>" + user);
+        return user;
     }
 }
