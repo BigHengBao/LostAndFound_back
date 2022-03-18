@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean addOrder(Goods goods, Integer noticeType) {
 
-        if (orderMapper.queryOrderById(goods.getuAccount(), goods.getgName()) == null) {
+        if (orderMapper.queryUserOrdersById(goods.getuAccount(), goods.getgName()) == null) {
             Order order = new Order(goods.getgName(), goods.getuAccount(), Constant.ORDER_ACTIVE_WAITING, noticeType);
             //插入一个用户-商品列
             orderMapper.insertOrder(order);
@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean adjustOrderActive(String userAccount, String goodsName, Integer active) {
-        if (orderMapper.queryOrderById(userAccount, goodsName) != null) {
+        if (orderMapper.queryUserOrdersById(userAccount, goodsName) != null) {
             orderMapper.updateOrder(userAccount, goodsName, active);
             return true;
         }
@@ -93,6 +93,36 @@ public class OrderServiceImpl implements OrderService {
                     mOrder.add(orderItem);
                 }
             }
+            return mOrder;
+        }
+        return null;
+    }
+
+    @Override
+    public List<OrderItem> getUserAllOrder(String uAccount) {
+        List<Order> userOrders = orderMapper.queryUserOrdersById(uAccount);
+        List<OrderItem> mOrder = new ArrayList<>();
+        if (userOrders != null) {
+            //封装
+            for (Order userorder : userOrders) {
+                OrderItem orderItem = new OrderItem();
+                if (userorder.getActive() != Constant.ORDER_ACTIVE_END
+                        && userorder.getActive() != Constant.ORDER_ACTIVE_CANCEL) {
+                    Goods goods = goodsMapper.queryGoodsById(userorder.getgName(), userorder.getuAccount());
+                    orderItem.setGoodsName(userorder.getgName());
+                    orderItem.setAuthorName(userMapper.queryUserByUid(userorder.getuAccount()).getrName());
+                    orderItem.setOrderType(userorder.getType());
+                    orderItem.setGoodsType(goods.getType());
+                    orderItem.setGoodsImage(null);
+                    if (userorder.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                        orderItem.setOrderTime(goods.getLoseTime());
+                    } else {
+                        orderItem.setOrderTime((goods.getGetTime()));
+                    }
+                    mOrder.add(orderItem);
+                }
+            }
+            System.out.println("getUserAllOrder-------------->: "+mOrder);
             return mOrder;
         }
         return null;

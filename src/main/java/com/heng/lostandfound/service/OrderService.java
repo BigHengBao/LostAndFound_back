@@ -16,4 +16,5 @@ public interface OrderService {
     boolean addOrder(Goods goods,Integer noticeType);
     boolean adjustOrderActive(String userAccount,String goodsName,Integer active);
     List<OrderItem> getAllOrder();
+    List<OrderItem> getUserAllOrder(String uAccount);
 }

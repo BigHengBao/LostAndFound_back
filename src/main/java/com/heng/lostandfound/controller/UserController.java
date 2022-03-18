@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.heng.lostandfound.entity.CommentItem;
 import com.heng.lostandfound.entity.MyResponse;
+import com.heng.lostandfound.entity.OrderItem;
 import com.heng.lostandfound.entity.User;
+import com.heng.lostandfound.service.OrderService;
 import com.heng.lostandfound.service.UserService;
 import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrderService orderService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String resist(@RequestBody String mHashMapStr) {
@@ -93,6 +98,34 @@ public class UserController {
                 (String) mHashMap.get("front"), getUserInfoFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
         System.out.println("getUserInfo request" + myResponseStr);
+        return myResponseStr;
+    }
+
+    @RequestMapping(value = "/getUserOrderList", method = RequestMethod.POST)
+    public String getUserOrderList(@RequestBody String mHashMapStr) {
+        System.out.println("getUserOrderList requestStr:" + mHashMapStr);
+        HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
+        String uAccount = (String) mHashMap.get("userAccount");
+        String myResponseStr = null;
+        boolean getUserOrderListFlag = false;
+        List<OrderItem> userOrders = null;
+        String msg = "";
+
+        if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
+            userOrders = orderService.getUserAllOrder(uAccount);
+            if (userOrders != null) {
+                getUserOrderListFlag = true;
+                msg = JSON.toJSON(userOrders).toString();
+                System.out.println("getUserOrderList msg: " + msg);
+            }
+
+        } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
+
+        }
+        MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
+                (String) mHashMap.get("front"), getUserOrderListFlag, msg);
+        myResponseStr = JSONObject.toJSONString(myResponse);
+        System.out.println("getUserOrderList request" + myResponseStr);
         return myResponseStr;
     }
 }

@@ -35,4 +35,10 @@
         from `myorder`
     </select>
 
+    <select id="queryUserOrdersById" resultMap="orderInfo">
+        select *
+        from `myorder`
+        where user_account = #{uAccount}
+    </select>
+
 </mapper>

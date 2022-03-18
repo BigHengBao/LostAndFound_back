@@ -70,7 +70,7 @@ public class CollectionServiceImpl implements CollectionService {
         if (collections != null) {
             for (UserCollection collection : collections) {
                 OrderItem orderItem = new OrderItem();
-                Order order = orderMapper.queryOrderById(
+                Order order = orderMapper.queryUserOrdersById(
                         userMapper.queryUserByuName(collection.getgAuthorName()).getuAccount(), collection.getgName());
 
 //                System.out.println("getAllCollections------------->" + order);

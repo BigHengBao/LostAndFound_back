@@ -59,6 +59,8 @@ public class CollectionController {
         System.out.println("getCollectionListById requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String uAccount = (String) mHashMap.get("uAccount");
+        System.out.println("getCollectionListById------------------------->" + uAccount);
+
         String myResponseStr = null;
         boolean getCollectionListById = false;
         List<OrderItem> allCollection = null;

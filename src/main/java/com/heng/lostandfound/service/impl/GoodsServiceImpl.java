@@ -52,9 +52,12 @@ public class GoodsServiceImpl implements GoodsService {
     public GoodsInfoItem getGoodsById(String goodsName, String uName) {
         GoodsInfoItem goodsInfoItem = new GoodsInfoItem();
         User user = userMapper.queryUserByuName(uName);
+//        System.out.println("getGoodsById user:------------->" + user);
         String uAccount = user.getuAccount();
+//        System.out.println("getGoodsById uAccount:------------->" + uAccount);
 
-        Order order = orderMapper.queryOrderById(uAccount, goodsName);
+        Order order = orderMapper.queryUserOrdersById(uAccount, goodsName);
+//        System.out.println("getGoodsById order:------------->" + order);
 
         Goods goods = goodsMapper.queryGoodsById(goodsName, uAccount);
         goods.setgImage(null);
