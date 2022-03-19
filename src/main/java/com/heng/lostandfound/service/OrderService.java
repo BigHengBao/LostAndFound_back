@@ -3,6 +3,7 @@ package com.heng.lostandfound.service;
 import com.heng.lostandfound.entity.Goods;
 import com.heng.lostandfound.entity.OrderItem;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
  */
 
 public interface OrderService {
-    boolean addOrder(Goods goods,Integer noticeType);
+    boolean addOrder(Goods goods,Integer noticeType) throws IOException;
     boolean adjustOrderActive(String userAccount,String goodsName,Integer active);
-    List<OrderItem> getAllOrder();
-    List<OrderItem> getUserAllOrder(String uAccount);
+    List<OrderItem> getAllOrder() throws IOException;
+    List<OrderItem> getUserAllOrder(String uAccount) throws IOException;
 }

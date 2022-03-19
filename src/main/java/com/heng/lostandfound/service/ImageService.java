@@ -10,7 +10,11 @@ import java.io.IOException;
  */
 
 public interface ImageService {
-    String saveUserImage(String imageStr, String userAccount,String imageUrl) throws IOException;
+    String saveUserImage(String imageStr, String userAccount, String imageUrl) throws IOException;
 
     String backUserImage(String userAccount) throws IOException;
+
+    String saveGoodsImage(String imageStr,String imageName, String imageUrl) throws IOException;
+
+    String backGoodsImage(String  imageName) throws IOException;
 }

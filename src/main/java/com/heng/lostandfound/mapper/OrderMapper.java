@@ -17,9 +17,10 @@ public interface OrderMapper {
 
     Integer updateOrder(String userAccount, String goodsName, Integer active);
 
-    Order queryUserOrdersById(String userAccount, String goodsName);
+    Order queryOrderById(String userAccount, String goodsName);
+
 
     List<Order> queryAllOrder();
 
-    List<Order> queryUserOrdersById(String uAccount);
+    List<Order> queryUserOrdersByUAccount(String userAccount);
 }

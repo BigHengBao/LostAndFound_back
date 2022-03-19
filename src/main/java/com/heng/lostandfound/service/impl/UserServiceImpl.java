@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService {
 //        System.out.println("registerUser:-=----------------->" + user);
         if (userMapper.queryUserByUid(user.getuAccount()) == null) {  //判断用户是否已存在
             //把客户端发来的图片存到resources/image*
-            String userImagePath = imageService.saveUserImage(user.getUserImage(), user.getuAccount(), Constant.USER_IMAGE);
+            String userImagePath = imageService.saveUserImage(
+                    user.getUserImage(), user.getuAccount(), Constant.USER_IMAGE);
             user.setUserImage(userImagePath);
 
 //            System.out.println("registerUser saveUserImage---------------->" + userImagePath);

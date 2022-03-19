@@ -35,10 +35,10 @@
         from `myorder`
     </select>
 
-    <select id="queryUserOrdersById" resultMap="orderInfo">
+    <select id="queryUserOrdersByUAccount" resultMap="orderInfo">
         select *
         from `myorder`
-        where user_account = #{uAccount}
+        where user_account = #{userAccount}
     </select>
 
 </mapper>

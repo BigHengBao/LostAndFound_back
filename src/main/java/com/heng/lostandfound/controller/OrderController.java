@@ -10,6 +10,7 @@ import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,20 +30,22 @@ public class OrderController {
     TypeService typeService;
 
     @RequestMapping(value = "/addOrder", method = RequestMethod.POST)
-    public String addOrder(@RequestBody String mHashMapStr) {
-        System.out.println("addOrder requestStr:" + mHashMapStr);
+    public String addOrder(@RequestBody String mHashMapStr) throws IOException {
+//        System.out.println("addOrder requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String myResponseStr = null;
 
         if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
             Goods goods = JSON.parseObject(mHashMap.get("goods").toString(), Goods.class);
-            System.out.println("addOrder goods: " + goods);
+//            System.out.println("addOrder goods: " + goods);
 
             Integer orderType = (Integer) mHashMap.get("orderType");
             boolean addOrderFlag = orderService.addOrder(goods, orderType);
+
+
             MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"), (String) mHashMap.get("front"), addOrderFlag, "");
             myResponseStr = JSONObject.toJSONString(myResponse);
-            System.out.println("addOrderFlag request" + myResponseStr);
+//            System.out.println("addOrderFlag request" + myResponseStr);
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }
@@ -70,7 +73,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/getOrderList", method = RequestMethod.POST)
-    public String getOrderList(@RequestBody String mHashMapStr) {
+    public String getOrderList(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getOrderList requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String myResponseStr = null;
@@ -92,7 +95,7 @@ public class OrderController {
         MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
                 (String) mHashMap.get("front"), getOrderListFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
-        System.out.println("getOrderList request" + myResponseStr);
+        System.out.println("getOrderList myResponseStr" + myResponseStr);
         return myResponseStr;
     }
 

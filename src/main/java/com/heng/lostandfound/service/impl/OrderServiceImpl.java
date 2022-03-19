@@ -8,11 +8,14 @@ import com.heng.lostandfound.mapper.GoodsMapper;
 import com.heng.lostandfound.mapper.OrderMapper;
 import com.heng.lostandfound.mapper.TypeMapper;
 import com.heng.lostandfound.mapper.UserMapper;
+import com.heng.lostandfound.service.ImageService;
 import com.heng.lostandfound.service.OrderService;
 import com.heng.lostandfound.utils.Constant;
+import com.heng.lostandfound.utils.ImageTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +40,32 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     TypeMapper typeMapper;
 
-    @Override
-    public boolean addOrder(Goods goods, Integer noticeType) {
+    @Autowired
+    ImageService imageService;
 
-        if (orderMapper.queryUserOrdersById(goods.getuAccount(), goods.getgName()) == null) {
+    @Override
+    public boolean addOrder(Goods goods, Integer noticeType) throws IOException {
+
+        if (orderMapper.queryOrderById(goods.getuAccount(), goods.getgName()) == null) {
             Order order = new Order(goods.getgName(), goods.getuAccount(), Constant.ORDER_ACTIVE_WAITING, noticeType);
+
             //插入一个用户-商品列
             orderMapper.insertOrder(order);
+            String imageTime = "";
+
+            if (noticeType.equals(Constant.ORDER_TYPE_GET)) {
+                imageTime = goods.getGetTime();
+
+            } else if (noticeType.equals(Constant.ORDER_TYPE_LOOKING)) {
+                imageTime = goods.getLoseTime();
+            }
+
+            // goods设置图片
+            String goodsImagePath = imageService.saveGoodsImage(goods.getgImage(),
+                    goods.getuAccount() + "_" + ImageTools.operateTimeStr(imageTime), Constant.GOODS_IMAGE);
+            goods.setgImage(goodsImagePath);
+
+
             //插入一个物品
             goodsMapper.insertGoods(goods);
             String typeName = goods.getType();
@@ -62,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean adjustOrderActive(String userAccount, String goodsName, Integer active) {
-        if (orderMapper.queryUserOrdersById(userAccount, goodsName) != null) {
+        if (orderMapper.queryOrderById(userAccount, goodsName) != null) {
             orderMapper.updateOrder(userAccount, goodsName, active);
             return true;
         }
@@ -70,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderItem> getAllOrder() {
+    public List<OrderItem> getAllOrder() throws IOException {
         List<Order> orders = orderMapper.queryAllOrder();
         List<OrderItem> mOrder = new ArrayList<>();
         if (orders != null) {
@@ -80,11 +102,24 @@ public class OrderServiceImpl implements OrderService {
                 if (order.getActive() != Constant.ORDER_ACTIVE_END
                         && order.getActive() != Constant.ORDER_ACTIVE_CANCEL) {
                     Goods goods = goodsMapper.queryGoodsById(order.getgName(), order.getuAccount());
+
+                    //设置图片
+                    String imageTime = "";
+                    if (order.getType().equals(Constant.ORDER_TYPE_GET)) {
+                        imageTime = goods.getGetTime();
+
+                    } else if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                        imageTime = goods.getLoseTime();
+                    }
+
+                    System.out.println("getUserAllOrder imageTime" + imageTime);
+                    String backUserImage = imageService.backGoodsImage(
+                            goods.getuAccount() + "_" + ImageTools.operateTimeStr(imageTime));
                     orderItem.setGoodsName(order.getgName());
                     orderItem.setAuthorName(userMapper.queryUserByUid(order.getuAccount()).getrName());
                     orderItem.setOrderType(order.getType());
                     orderItem.setGoodsType(goods.getType());
-                    orderItem.setGoodsImage(null);
+                    orderItem.setGoodsImage(backUserImage);
                     if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
                         orderItem.setOrderTime(goods.getLoseTime());
                     } else {
@@ -99,8 +134,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderItem> getUserAllOrder(String uAccount) {
-        List<Order> userOrders = orderMapper.queryUserOrdersById(uAccount);
+    public List<OrderItem> getUserAllOrder(String uAccount) throws IOException {
+        List<Order> userOrders = orderMapper.queryUserOrdersByUAccount(uAccount);
         List<OrderItem> mOrder = new ArrayList<>();
         if (userOrders != null) {
             //封装
@@ -109,11 +144,25 @@ public class OrderServiceImpl implements OrderService {
                 if (userorder.getActive() != Constant.ORDER_ACTIVE_END
                         && userorder.getActive() != Constant.ORDER_ACTIVE_CANCEL) {
                     Goods goods = goodsMapper.queryGoodsById(userorder.getgName(), userorder.getuAccount());
+
+                    //设置图片
+                    String imageTime = "";
+                    if (userorder.getType().equals(Constant.ORDER_TYPE_GET)) {
+                        imageTime = goods.getGetTime();
+
+                    } else if (userorder.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                        imageTime = goods.getLoseTime();
+                    }
+
+                    System.out.println("getUserAllOrder imageTime" + imageTime);
+                    String backUserImage = imageService.backGoodsImage(
+                            uAccount + "_" + ImageTools.operateTimeStr(imageTime));
+                    //开始组装数据
                     orderItem.setGoodsName(userorder.getgName());
                     orderItem.setAuthorName(userMapper.queryUserByUid(userorder.getuAccount()).getrName());
                     orderItem.setOrderType(userorder.getType());
                     orderItem.setGoodsType(goods.getType());
-                    orderItem.setGoodsImage(null);
+                    orderItem.setGoodsImage(backUserImage);
                     if (userorder.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
                         orderItem.setOrderTime(goods.getLoseTime());
                     } else {
@@ -122,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
                     mOrder.add(orderItem);
                 }
             }
-            System.out.println("getUserAllOrder-------------->: "+mOrder);
+//            System.out.println("getUserAllOrder-------------->: " + mOrder);
             return mOrder;
         }
         return null;

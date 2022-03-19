@@ -14,9 +14,9 @@ public class OrderItem {
     private String authorName;
     private String goodsType;
     private String orderTime;
-    private File goodsImage;
+    private String goodsImage;
 
-    public OrderItem(String goodsName, Integer orderType, String authorName, String goodsType, String orderTime, File goodsImage) {
+    public OrderItem(String goodsName, Integer orderType, String authorName, String goodsType, String orderTime, String goodsImage) {
         this.goodsName = goodsName;
         this.orderType = orderType;
         this.authorName = authorName;
@@ -68,11 +68,11 @@ public class OrderItem {
         this.orderTime = orderTime;
     }
 
-    public File getGoodsImage() {
+    public String getGoodsImage() {
         return goodsImage;
     }
 
-    public void setGoodsImage(File goodsImage) {
+    public void setGoodsImage(String goodsImage) {
         this.goodsImage = goodsImage;
     }
 

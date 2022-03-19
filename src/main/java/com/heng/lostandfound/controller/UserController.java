@@ -103,7 +103,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserOrderList", method = RequestMethod.POST)
-    public String getUserOrderList(@RequestBody String mHashMapStr) {
+    public String getUserOrderList(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getUserOrderList requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String uAccount = (String) mHashMap.get("userAccount");
