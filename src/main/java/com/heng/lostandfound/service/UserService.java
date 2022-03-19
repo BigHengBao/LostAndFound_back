@@ -2,6 +2,7 @@ package com.heng.lostandfound.service;
 
 import com.heng.lostandfound.entity.User;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -12,11 +13,11 @@ import java.util.HashMap;
  */
 
 public interface UserService {
-    boolean registerUser(User user);
+    boolean registerUser(User user) throws IOException;
 
     boolean cancelUser(String uid);
 
     boolean loginUser(HashMap<String, String> mHashMap);
 
-    User getUserInfo(String uAccount);
+    User getUserInfo(String uAccount) throws IOException;
 }

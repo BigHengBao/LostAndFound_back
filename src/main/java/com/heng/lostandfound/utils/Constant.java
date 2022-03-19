@@ -40,4 +40,9 @@ public class Constant {
     public static final Integer COLLECTION_ACTIVE_TRUE = 1;
     public static final Integer COLLECTION_ACTIVE_FALSE = 0;
 
+    //图片存储根目录
+    public static final String BASE_IMAGE_LOCATION = System.getProperty("user.dir") + "\\src\\main\\resources\\images";
+    public static final String USER_IMAGE = "\\User";
+    public static final String GOODS_IMAGE = "\\Goods";
+
 }

@@ -2,11 +2,13 @@ package com.heng.lostandfound.service.impl;
 
 import com.heng.lostandfound.entity.User;
 import com.heng.lostandfound.mapper.UserMapper;
+import com.heng.lostandfound.service.ImageService;
 import com.heng.lostandfound.service.UserService;
 import com.heng.lostandfound.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -20,9 +22,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    ImageService imageService;
+
     @Override
-    public boolean registerUser(User user) {
+    public boolean registerUser(User user) throws IOException {
+//        System.out.println("registerUser:-=----------------->" + user);
         if (userMapper.queryUserByUid(user.getuAccount()) == null) {  //判断用户是否已存在
+            //把客户端发来的图片存到resources/image*
+            String userImagePath = imageService.saveUserImage(user.getUserImage(), user.getuAccount(), Constant.USER_IMAGE);
+            user.setUserImage(userImagePath);
+
+//            System.out.println("registerUser saveUserImage---------------->" + userImagePath);
+
             user.setActive(Constant.ACTIVE_TRUE);
             userMapper.insertUser(user);
             return true;
@@ -52,9 +64,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserInfo(String uAccount) {
+    public User getUserInfo(String uAccount) throws IOException {
         User user = userMapper.queryUserByUid(uAccount);
-        System.out.println("getUserInfo------------------>" + user);
+        String backUserImage = imageService.backUserImage(uAccount);
+        user.setUserImage(backUserImage);
+//        System.out.println("getUserInfo------------------>" + user);
         return user;
     }
 }
