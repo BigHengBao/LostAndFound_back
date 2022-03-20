@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CollectionController {
     }
 
     @RequestMapping(value = "/getCollectionListById", method = RequestMethod.POST)
-    public String getCollectionListById(@RequestBody String mHashMapStr) {
+    public String getCollectionListById(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getCollectionListById requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String uAccount = (String) mHashMap.get("uAccount");

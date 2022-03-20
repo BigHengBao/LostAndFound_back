@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class CommentController {
 
 
     @RequestMapping(value = "/getCommentListById", method = RequestMethod.POST)
-    public String getCommentListById(@RequestBody String mHashMapStr) {
+    public String getCommentListById(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getCommentListById requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String goodsName = (String) mHashMap.get("goodsName");

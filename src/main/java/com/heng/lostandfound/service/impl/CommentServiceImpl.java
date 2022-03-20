@@ -1,14 +1,18 @@
 package com.heng.lostandfound.service.impl;
 
-import com.heng.lostandfound.entity.Comment;
-import com.heng.lostandfound.entity.CommentItem;
-import com.heng.lostandfound.entity.User;
+import com.heng.lostandfound.entity.*;
 import com.heng.lostandfound.mapper.CommentMapper;
+import com.heng.lostandfound.mapper.GoodsMapper;
+import com.heng.lostandfound.mapper.OrderMapper;
 import com.heng.lostandfound.mapper.UserMapper;
 import com.heng.lostandfound.service.CommentService;
+import com.heng.lostandfound.service.ImageService;
+import com.heng.lostandfound.utils.Constant;
+import com.heng.lostandfound.utils.ImageTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +30,15 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    OrderMapper orderMapper;
+
+    @Autowired
+    GoodsMapper goodsMapper;
+
+    @Autowired
+    ImageService imageService;
+
     @Override
     public boolean addComment(Comment comment) {
         commentMapper.insertComment(comment);
@@ -33,22 +46,23 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentItem> getAllComments(String goodsName, String authorName) {
+    public List<CommentItem> getAllComments(String goodsName, String authorName) throws IOException {
         List<CommentItem> comments = new ArrayList<>();
 //        User user = userMapper.queryUserByuName(authorName);
 //        System.out.println("getAllComments author:-->" + user);
-        List<Comment> allCommentsById = commentMapper.getAllCommentsById(goodsName, authorName);
+        List<Comment> allUserComments = commentMapper.getAllCommentsById(goodsName, authorName);
 
-        if (allCommentsById != null) {
-            for (Comment comment : allCommentsById) {
-                String name = userMapper.queryUserByUid(comment.getuAccount()).getrName();
+        if (allUserComments != null) {
+            for (Comment comment : allUserComments) {
                 CommentItem commentItem = new CommentItem();
+
+                String name = userMapper.queryUserByUid(comment.getuAccount()).getrName();
                 commentItem.setUsername(name);
                 commentItem.setContent(comment.getContent());
                 commentItem.setAddTime(comment.getAddTime());
                 commentItem.setUserImg(null);
                 comments.add(commentItem);
-//                System.out.println("getAllComments:---------------------->" + commentItem);
+//                System.out.println("getUserComments:---------------------->" + commentItem);
             }
             return comments;
         }

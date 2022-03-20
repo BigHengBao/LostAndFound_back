@@ -9,10 +9,13 @@ import com.heng.lostandfound.mapper.GoodsMapper;
 import com.heng.lostandfound.mapper.OrderMapper;
 import com.heng.lostandfound.mapper.UserMapper;
 import com.heng.lostandfound.service.CollectionService;
+import com.heng.lostandfound.service.ImageService;
 import com.heng.lostandfound.utils.Constant;
+import com.heng.lostandfound.utils.ImageTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,9 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    ImageService imageService;
 
     @Override
     public boolean addCollection(UserCollection collection) {
@@ -63,7 +69,7 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public List<OrderItem> getAllCollections(String uAccount) {
+    public List<OrderItem> getAllCollections(String uAccount) throws IOException {
         List<OrderItem> collectionItems = new ArrayList<>();
         List<UserCollection> collections = collectionMapper.queryAllCollections(uAccount);
 //        System.out.println("getAllCollections------------->" + collections);
@@ -76,11 +82,26 @@ public class CollectionServiceImpl implements CollectionService {
 //                System.out.println("getAllCollections------------->" + order);
 
                 Goods goods = goodsMapper.queryGoodsById(order.getgName(), order.getuAccount());
+
+
+                //设置图片
+                String imageTime = "";
+                if (order.getType().equals(Constant.ORDER_TYPE_GET)) {
+                    imageTime = goods.getGetTime();
+
+                } else if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+                    imageTime = goods.getLoseTime();
+                }
+
+                System.out.println("getUserAllOrder imageTime" + imageTime);
+                String backGoodsImage = imageService.backGoodsImage(
+                        goods.getuAccount() + "_" + ImageTools.operateTimeStr(imageTime));
+
                 orderItem.setGoodsName(order.getgName());
                 orderItem.setAuthorName(userMapper.queryUserByUid(order.getuAccount()).getrName());
                 orderItem.setOrderType(order.getType());
                 orderItem.setGoodsType(goods.getType());
-                orderItem.setGoodsImage(null);
+                orderItem.setGoodsImage(backGoodsImage);
                 if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
                     orderItem.setOrderTime(goods.getLoseTime());
                 } else {

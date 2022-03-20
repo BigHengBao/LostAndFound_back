@@ -8,9 +8,13 @@ import com.heng.lostandfound.mapper.GoodsMapper;
 import com.heng.lostandfound.mapper.OrderMapper;
 import com.heng.lostandfound.mapper.UserMapper;
 import com.heng.lostandfound.service.GoodsService;
+import com.heng.lostandfound.service.ImageService;
+import com.heng.lostandfound.utils.Constant;
+import com.heng.lostandfound.utils.ImageTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,6 +33,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     OrderMapper orderMapper;
+
+    @Autowired
+    ImageService imageService;
 
     @Override
     public boolean addGoods(Goods goods) {
@@ -49,7 +56,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public GoodsInfoItem getGoodsById(String goodsName, String uName) {
+    public GoodsInfoItem getGoodsById(String goodsName, String uName) throws IOException {
         GoodsInfoItem goodsInfoItem = new GoodsInfoItem();
         User user = userMapper.queryUserByuName(uName);
 //        System.out.println("getGoodsById user:------------->" + user);
@@ -60,7 +67,21 @@ public class GoodsServiceImpl implements GoodsService {
 //        System.out.println("getGoodsById order:------------->" + order);
 
         Goods goods = goodsMapper.queryGoodsById(goodsName, uAccount);
-        goods.setgImage(null);
+
+        //设置图片
+        String imageTime = "";
+        if (order.getType().equals(Constant.ORDER_TYPE_GET)) {
+            imageTime = goods.getGetTime();
+
+        } else if (order.getType().equals(Constant.ORDER_TYPE_LOOKING)) {
+            imageTime = goods.getLoseTime();
+        }
+
+        System.out.println("getUserAllOrder imageTime" + imageTime);
+        String backGoodsImage = imageService.backGoodsImage(
+                goods.getuAccount() + "_" + ImageTools.operateTimeStr(imageTime));
+        goods.setgImage(backGoodsImage);
+
         goodsInfoItem.setAuthorName(uName);
         goodsInfoItem.setGoods(goods);
         goodsInfoItem.setOrder(order);

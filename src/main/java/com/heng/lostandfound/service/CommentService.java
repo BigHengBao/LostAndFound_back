@@ -3,6 +3,7 @@ package com.heng.lostandfound.service;
 import com.heng.lostandfound.entity.Comment;
 import com.heng.lostandfound.entity.CommentItem;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ import java.util.List;
 public interface CommentService {
     boolean addComment(Comment comment);
 
-    List<CommentItem> getAllComments(String goodsName, String uAccount);
+    List<CommentItem> getAllComments(String goodsName, String uAccount) throws IOException;
 }

@@ -3,6 +3,7 @@ package com.heng.lostandfound.service;
 import com.heng.lostandfound.entity.Goods;
 import com.heng.lostandfound.entity.GoodsInfoItem;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,5 +17,5 @@ public interface GoodsService {
     boolean addGoods(Goods goods);
 
     List<Goods> getAllGoods();
-    GoodsInfoItem getGoodsById(String goodsName, String uName);
+    GoodsInfoItem getGoodsById(String goodsName, String uName) throws IOException;
 }

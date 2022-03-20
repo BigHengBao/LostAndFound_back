@@ -3,6 +3,7 @@ package com.heng.lostandfound.service;
 import com.heng.lostandfound.entity.OrderItem;
 import com.heng.lostandfound.entity.UserCollection;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public interface CollectionService {
 
     boolean deleteCollection(UserCollection collection);
 
-    List<OrderItem> getAllCollections(String uAccount);
+    List<OrderItem> getAllCollections(String uAccount) throws IOException;
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -28,7 +29,7 @@ public class GoodsController {
     GoodsService goodsService;
 
     @RequestMapping(value = "/getGoodsInfo", method = RequestMethod.POST)
-    public String getGoodsInfo(@RequestBody String mHashMapStr) {
+    public String getGoodsInfo(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getGoodsInfo requestStr:" + mHashMapStr);
         HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
         String myResponseStr = null;
