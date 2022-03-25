@@ -86,7 +86,7 @@ public class OrderController {
             if (allOrder != null) {
                 getOrderListFlag = true;
                 msg = JSON.toJSON(allOrder).toString();
-                System.out.println("getOrderList msg: " + msg);
+//                System.out.println("getOrderList msg: " + msg);
             }
 
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
@@ -95,7 +95,7 @@ public class OrderController {
         MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
                 (String) mHashMap.get("front"), getOrderListFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
-        System.out.println("getOrderList myResponseStr" + myResponseStr);
+//        System.out.println("getOrderList myResponseStr" + myResponseStr);
         return myResponseStr;
     }
 

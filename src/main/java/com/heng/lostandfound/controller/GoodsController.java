@@ -50,7 +50,7 @@ public class GoodsController {
             MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
                     (String) mHashMap.get("front"), getGoodsInfoFlag, msg);
             myResponseStr = JSONObject.toJSONString(myResponse);
-            System.out.println("getGoodsInfo response :->>" + myResponseStr);
+//            System.out.println("getGoodsInfo response :->>" + myResponseStr);
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
 
         }

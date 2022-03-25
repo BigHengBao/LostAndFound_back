@@ -117,7 +117,7 @@ public class UserController {
             if (userOrders != null) {
                 getUserOrderListFlag = true;
                 msg = JSON.toJSON(userOrders).toString();
-                System.out.println("getUserOrderList msg: " + msg);
+//                System.out.println("getUserOrderList msg: " + msg);
             }
 
         } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
@@ -126,7 +126,7 @@ public class UserController {
         MyResponse myResponse = new MyResponse((String) mHashMap.get("requestId"),
                 (String) mHashMap.get("front"), getUserOrderListFlag, msg);
         myResponseStr = JSONObject.toJSONString(myResponse);
-        System.out.println("getUserOrderList request" + myResponseStr);
+//        System.out.println("getUserOrderList request" + myResponseStr);
         return myResponseStr;
     }
 }
