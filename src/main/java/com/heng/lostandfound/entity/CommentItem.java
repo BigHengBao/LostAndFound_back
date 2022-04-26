@@ -60,7 +60,6 @@ public class CommentItem {
                 "username='" + username + '\'' +
                 ", content='" + content + '\'' +
                 ", addTime='" + addTime + '\'' +
-                ", userImg='" + userImg + '\'' +
                 '}';
     }
 }

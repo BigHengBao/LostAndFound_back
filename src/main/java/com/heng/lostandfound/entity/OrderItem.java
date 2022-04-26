@@ -84,7 +84,6 @@ public class OrderItem {
                 ", authorName='" + authorName + '\'' +
                 ", goodsType='" + goodsType + '\'' +
                 ", orderTime=" + orderTime +
-                ", goodsImage=" + goodsImage +
                 '}';
     }
 }

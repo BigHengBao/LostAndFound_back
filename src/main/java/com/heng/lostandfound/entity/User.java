@@ -125,7 +125,6 @@ public class User {
                 ", uAddress='" + uAddress + '\'' +
                 ", active=" + active +
                 ", uLevel=" + uLevel +
-                ", userImage='" + userImage + '\'' +
                 ", uWrite='" + uWrite + '\'' +
                 '}';
     }

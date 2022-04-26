@@ -1,6 +1,5 @@
 package com.heng.lostandfound.entity;
 
-import java.sql.Timestamp;
 
 /**
  * Editor: hengBao

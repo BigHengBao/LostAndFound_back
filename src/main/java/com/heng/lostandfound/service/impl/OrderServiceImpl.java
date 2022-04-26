@@ -171,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
                     mOrder.add(orderItem);
                 }
             }
-//            System.out.println("getUserAllOrder-------------->: " + mOrder);
+            System.out.println("getUserAllOrder-------------->: " + mOrder);
             return mOrder;
         }
         return null;

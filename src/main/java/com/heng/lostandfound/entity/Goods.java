@@ -101,10 +101,8 @@ public class Goods {
                 "gName='" + gName + '\'' +
                 ", type='" + type + '\'' +
                 ", uAccount='" + uAccount + '\'' +
-                ", getTime=" + getTime +
                 ", loseTime=" + loseTime +
                 ", content='" + content + '\'' +
-                ", gImage='" + gImage + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

@@ -61,7 +61,6 @@ public class GoodType {
         return "GoodType{" +
                 "typeName='" + typeName + '\'' +
                 ", typeNum=" + typeNum +
-                ", typeImage='" + typeImage + '\'' +
                 ", active=" + active +
                 '}';
     }

@@ -60,7 +60,6 @@ public class GoodsTypeItem {
     public String toString() {
         return "GoodsTypeItem{" +
                 "itemName='" + itemName + '\'' +
-                ", ItemImg=" + ItemImg +
                 ", userName='" + userName + '\'' +
                 ", userAccount='" + userAccount + '\'' +
                 '}';
