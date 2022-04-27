@@ -75,6 +75,29 @@ public class UserController {
         return myResponseStr;
     }
 
+    @RequestMapping(value = "/adjustUserInfo", method = RequestMethod.POST)
+    public String adjustUser(@RequestBody String mHashMapStr) throws IOException {
+        System.out.println("adjustUserInfo requestStr:" + mHashMapStr);
+        HashMap mHashMap = JSON.parseObject(mHashMapStr, HashMap.class);
+        String myResponseStr = null;
+
+        if (mHashMap.get("front").toString().equals(Constant.FRONT_ANDROID)) {
+            User user = JSON.parseObject(mHashMap.get("user").toString(), User.class);
+//            System.out.println("register user" +JSON.parseObject(mHashMap.get("user").toString(), User.class));
+            boolean adjustUserFlag = userService.adjustUserInfo(user);
+
+            MyResponse myResponse =
+                    new MyResponse((String) mHashMap.get("requestId"),
+                            (String) mHashMap.get("front"),
+                            adjustUserFlag, "");
+            myResponseStr = JSONObject.toJSONString(myResponse);
+            System.out.println("adjustUserInfo request" + myResponseStr);
+        } else if (mHashMap.get("front").toString().equals(Constant.FRONT_PC)) {
+
+        }
+        return myResponseStr;
+    }
+
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
     public String getUserInfo(@RequestBody String mHashMapStr) throws IOException {
         System.out.println("getUserInfo requestStr:" + mHashMapStr);

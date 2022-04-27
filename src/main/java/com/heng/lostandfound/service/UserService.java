@@ -20,4 +20,6 @@ public interface UserService {
     boolean loginUser(HashMap<String, String> mHashMap);
 
     User getUserInfo(String uAccount) throws IOException;
+
+    boolean adjustUserInfo(User user) throws IOException;
 }

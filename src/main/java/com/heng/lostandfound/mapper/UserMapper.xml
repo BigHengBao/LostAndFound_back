@@ -120,4 +120,11 @@
         where user_account = #{uAccount}
           and user_password = #{uPwd}
     </select>
+
+    <select id="adjustUserInfo" resultType="integer">
+        update `myuser`
+        set user_rname=#{newRName},user_sex=#{newSex},user_phone=#{newPhone},user_address=#{newAddress}
+          ,user_write=#{newWrite},user_image=#{newImage}
+        where user_account = #{uAccount}
+    </select>
 </mapper>

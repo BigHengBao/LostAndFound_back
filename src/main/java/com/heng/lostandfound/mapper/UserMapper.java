@@ -24,4 +24,7 @@ public interface UserMapper {
     User loginCheck(String uAccount, String uPwd);
 
     Integer updateUser(User user);
+
+    Integer adjustUserInfo(String uAccount, String newRName, Integer newSex, String newPhone, String newAddress,
+                           String newWrite, String newImage);
 }

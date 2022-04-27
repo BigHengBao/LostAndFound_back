@@ -69,7 +69,20 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.queryUserByUid(uAccount);
         String backUserImage = imageService.backUserImage(uAccount);
         user.setUserImage(backUserImage);
+        user.setuPwd("**");
 //        System.out.println("getUserInfo------------------>" + user);
         return user;
+    }
+
+    @Override
+    public boolean adjustUserInfo(User user) throws IOException {
+        if (userMapper.queryUserByUid(user.getuAccount()) != null) {  //判断用户是否已存在
+            String userImagePath = imageService.saveUserImage(
+                    user.getUserImage(), user.getuAccount(), Constant.USER_IMAGE);
+            user.setUserImage(userImagePath);
+            userMapper.adjustUserInfo(user.getuAccount(), user.getrName(), user.getuSex(), user.getuPhone(), user.getuAddress(), user.getuWrite(), user.getUserImage());
+            return true;
+        }
+        return false;
     }
 }
