@@ -1,5 +1,6 @@
 package com.heng.lostandfound.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -8,7 +9,7 @@ import java.sql.Timestamp;
  * date: 2022/3/4/16:40
  * title：收藏表
  */
-public class UserCollection {
+public class UserCollection implements Serializable {
     private String gName;  //物品名称
     private String uAccount;  //用户账号
     private String addTime;

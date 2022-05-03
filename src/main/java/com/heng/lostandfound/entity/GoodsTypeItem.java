@@ -1,6 +1,7 @@
 package com.heng.lostandfound.entity;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * Editor: hengBao
@@ -8,7 +9,7 @@ import java.io.File;
  * date: 2022/3/10/18:51
  * title：用于封装GoodsType类
  */
-public class GoodsTypeItem {
+public class GoodsTypeItem implements Serializable {
     private String itemName;
     private File ItemImg;
     private String userName;

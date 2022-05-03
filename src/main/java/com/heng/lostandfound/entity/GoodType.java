@@ -1,5 +1,6 @@
 package com.heng.lostandfound.entity;
 
+import java.io.Serializable;
 import java.util.stream.Stream;
 
 /**
@@ -8,7 +9,7 @@ import java.util.stream.Stream;
  * date: 2022/3/4/16:33
  * title：商品分类表
  */
-public class GoodType {
+public class GoodType implements Serializable {
     private String typeName;
     private Integer typeNum;
     private String typeImage;

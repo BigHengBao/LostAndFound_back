@@ -1,6 +1,7 @@
 package com.heng.lostandfound.entity;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * Editor: hengBao
@@ -8,7 +9,7 @@ import java.io.File;
  * date: 2022/3/10/15:13
  * title：用于封装order的中间类
  */
-public class OrderItem {
+public class OrderItem implements Serializable {
     private String goodsName;
     private Integer orderType;
     private String authorName;
